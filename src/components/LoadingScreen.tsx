@@ -75,7 +75,7 @@ export function LoadingScreen() {
       <div className="loading-screen__bar" aria-hidden="true">
         <div
           className="loading-screen__bar-fill"
-          style={{ width: `${progress}%` }}
+          style={{ transform: `scaleX(${progress / 100})` }}
         />
       </div>
 
