@@ -27,10 +27,11 @@ export function Header() {
           ) : (
             <span
               className="site-header__link site-header__link--disabled"
-              aria-label="Chart link unavailable"
+              aria-label="Chart coming soon"
             >
               <ChartIcon width={16} height={16} />
               <span className="site-header__link-text">Chart</span>
+              <span className="coming-soon-badge">Soon</span>
             </span>
           )}
 
@@ -48,10 +49,11 @@ export function Header() {
           ) : (
             <span
               className="site-header__link site-header__link--disabled"
-              aria-label="X link unavailable"
+              aria-label="X coming soon"
             >
               <XIcon width={15} height={15} />
               <span className="site-header__link-text">X</span>
+              <span className="coming-soon-badge">Soon</span>
             </span>
           )}
         </nav>

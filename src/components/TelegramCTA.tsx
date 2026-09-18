@@ -19,7 +19,7 @@ export function TelegramCTA({ className }: TelegramCTAProps) {
         <span className="telegram-cta__icon">
           <TelegramIcon width={22} height={22} />
         </span>
-        Telegram link not provided
+        Telegram <span className="coming-soon-badge">Coming soon</span>
       </div>
     );
   }

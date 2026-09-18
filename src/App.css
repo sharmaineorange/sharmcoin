@@ -3,6 +3,7 @@
 /* ---------------------------------------------------------------------- */
 
 .page {
+  position: relative;
   background:
     radial-gradient(
       ellipse 60% 40% at 15% -10%,
@@ -10,6 +11,89 @@
       transparent 60%
     ),
     var(--bg);
+}
+
+.page__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Coming soon badge (shared)                                              */
+/* ---------------------------------------------------------------------- */
+
+.coming-soon-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(255, 122, 24, 0.1);
+  border: 1px dashed rgba(255, 122, 24, 0.4);
+  padding: 2px 7px;
+  border-radius: 999px;
+  margin-left: 2px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Ambient background currency flow                                       */
+/* ---------------------------------------------------------------------- */
+
+.background-flow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.background-flow__particle {
+  position: absolute;
+  bottom: 0;
+  will-change: transform, opacity;
+  animation: background-flow-rise linear infinite;
+}
+
+.background-flow__particle--coin {
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--accent-hover),
+    var(--accent) 65%,
+    transparent 100%
+  );
+  filter: blur(0.5px);
+}
+
+.background-flow__particle--glyph {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+@keyframes background-flow-rise {
+  0% {
+    transform: translate3d(0, 10vh, 0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--peak-opacity, 0.16);
+  }
+  50% {
+    transform: translate3d(0, -55vh, 0) translateX(var(--drift, 40px));
+  }
+  90% {
+    opacity: var(--peak-opacity, 0.16);
+  }
+  100% {
+    transform: translate3d(0, -120vh, 0) translateX(0);
+    opacity: 0;
+  }
 }
 
 /* ---------------------------------------------------------------------- */

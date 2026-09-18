@@ -71,7 +71,7 @@ export function ContractAddress() {
         </div>
       ) : (
         <p className="contract-address__missing">
-          Contract address not provided
+          Contract address <span className="coming-soon-badge">Coming soon</span>
         </p>
       )}
 
