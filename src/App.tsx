@@ -4,6 +4,7 @@ import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { ContractAddress } from "./components/ContractAddress";
 import { Footer } from "./components/Footer";
+import { LoadingScreen } from "./components/LoadingScreen";
 import { site } from "./config/site";
 
 function App() {
@@ -14,14 +15,17 @@ function App() {
   }, []);
 
   return (
-    <div className="page">
-      <Header />
-      <main className="page__main">
-        <Hero />
-        <ContractAddress />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <LoadingScreen />
+      <div className="page">
+        <Header />
+        <main className="page__main">
+          <Hero />
+          <ContractAddress />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 }
 
