@@ -54,6 +54,10 @@
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  /* Keep particles from drifting up through the header/logo — fade the
+     whole effect out before it reaches that zone. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, transparent 32px, black 110px);
+  mask-image: linear-gradient(to bottom, transparent, transparent 32px, black 110px);
 }
 
 .background-flow__particle {
