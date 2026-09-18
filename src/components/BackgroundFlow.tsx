@@ -37,11 +37,6 @@ function makeParticles(): Particle[] {
 
 export function BackgroundFlow() {
   const particles = useMemo(makeParticles, []);
-  const reducedMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-
-  if (reducedMotion) return null;
 
   return (
     <div className="background-flow" aria-hidden="true">

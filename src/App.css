@@ -129,6 +129,24 @@
   }
 }
 
+/* The global `prefers-reduced-motion` rule in index.css collapses every
+   animation's duration to ~0, which would otherwise snap each particle to
+   its final keyframe (fully risen off-screen, opacity 0) — i.e. nothing
+   visible. Give reduced-motion viewers a static field instead of hiding
+   the effect entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .background-flow__particle {
+    top: 40%;
+    bottom: auto;
+    opacity: var(--peak-opacity, 0.14);
+    transform: none;
+  }
+
+  .background-flow__coin-face {
+    animation: none;
+  }
+}
+
 /* ---------------------------------------------------------------------- */
 /* Loading screen                                                          */
 /* ---------------------------------------------------------------------- */
