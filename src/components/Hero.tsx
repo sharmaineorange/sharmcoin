@@ -34,8 +34,8 @@ export function Hero() {
         <div className="hero__mascot hero__mascot--mobile">
           <img
             src={mascotMobile}
-            width={1084}
-            height={1326}
+            width={745}
+            height={1022}
             alt=""
             className="hero__mascot-img"
             loading="lazy"

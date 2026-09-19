@@ -4,6 +4,11 @@
 
 .page {
   position: relative;
+  /* Establishes a stacking context so .background-flow's negative z-index
+     is scoped here (painting above this element's own background) instead
+     of being compared against the whole document, where it would end up
+     underneath this element's own opaque background. */
+  z-index: 0;
   background:
     radial-gradient(
       ellipse 60% 40% at 15% -10%,
@@ -49,6 +54,10 @@
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  /* Keep particles from drifting up through the header/logo — fade the
+     whole effect out before it reaches that zone. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, transparent 32px, black 110px);
+  mask-image: linear-gradient(to bottom, transparent, transparent 32px, black 110px);
 }
 
 .background-flow__particle {
@@ -60,6 +69,13 @@
 
 .background-flow__particle--coin {
   border-radius: 50%;
+}
+
+.background-flow__coin-face {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
   background: radial-gradient(
     circle at 35% 30%,
     var(--accent-hover),
@@ -67,6 +83,9 @@
     transparent 100%
   );
   filter: blur(0.5px);
+  animation-name: background-flow-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 .background-flow__particle--glyph {
@@ -78,21 +97,57 @@
 
 @keyframes background-flow-rise {
   0% {
-    transform: translate3d(0, 10vh, 0) translateX(0);
+    transform: translate3d(0, 10vh, 0) translateX(0) rotate(0deg);
     opacity: 0;
   }
-  10% {
+  8% {
     opacity: var(--peak-opacity, 0.16);
   }
-  50% {
-    transform: translate3d(0, -55vh, 0) translateX(var(--drift, 40px));
+  25% {
+    transform: translate3d(0, -22vh, 0) translateX(var(--drift, 40px))
+      rotate(calc(var(--rotate, 0deg) * 0.3));
   }
-  90% {
+  50% {
+    transform: translate3d(0, -55vh, 0) translateX(0)
+      rotate(calc(var(--rotate, 0deg) * 0.55));
+  }
+  75% {
+    transform: translate3d(0, -88vh, 0) translateX(calc(var(--drift, 40px) * -1))
+      rotate(calc(var(--rotate, 0deg) * 0.8));
+  }
+  92% {
     opacity: var(--peak-opacity, 0.16);
   }
   100% {
-    transform: translate3d(0, -120vh, 0) translateX(0);
+    transform: translate3d(0, -120vh, 0) translateX(0) rotate(var(--rotate, 0deg));
     opacity: 0;
+  }
+}
+
+@keyframes background-flow-spin {
+  from {
+    transform: perspective(220px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(220px) rotateY(360deg);
+  }
+}
+
+/* The global `prefers-reduced-motion` rule in index.css collapses every
+   animation's duration to ~0, which would otherwise snap each particle to
+   its final keyframe (fully risen off-screen, opacity 0) — i.e. nothing
+   visible. Give reduced-motion viewers a static field instead of hiding
+   the effect entirely. */
+@media (prefers-reduced-motion: reduce) {
+  .background-flow__particle {
+    top: 40%;
+    bottom: auto;
+    opacity: var(--peak-opacity, 0.14);
+    transform: none;
+  }
+
+  .background-flow__coin-face {
+    animation: none;
   }
 }
 
