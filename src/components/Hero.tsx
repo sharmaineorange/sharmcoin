@@ -13,8 +13,8 @@ export function Hero() {
       <div className="hero__mascot hero__mascot--desktop">
         <img
           src={mascotDesktop}
-          width={1185}
-          height={1194}
+          width={957}
+          height={897}
           alt=""
           className="hero__mascot-img"
           fetchPriority="high"
